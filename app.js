@@ -1,7 +1,7 @@
 /* Imports */
 import { renderListItem } from './render-utils.js';
 // this will check if we have a user and set signout link if it exists
-//import './auth/user.js';
+import { checkAuth } from './fetch-utils.js';
 
 /* Get DOM Elements */
 const addItemForm = document.getElementById('new-item-form');
@@ -18,7 +18,7 @@ let items = [
 /* Events */
 // on list page load
 window.addEventListener('load', async () => {
-    //checkAuth();
+    checkAuth();
     //items = fetchItems();
     displayList();
 });
