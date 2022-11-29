@@ -16,6 +16,12 @@ let items = [
 ];
 
 /* Events */
+// on list page load
+window.addEventListener('load', async () => {
+    //checkAuth();
+    //items = fetchItems();
+    displayList();
+});
 
 /* Display Functions */
 function displayList() {
