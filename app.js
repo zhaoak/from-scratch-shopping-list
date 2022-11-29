@@ -3,9 +3,14 @@
 import './auth/user.js';
 
 /* Get DOM Elements */
+const addItemForm = document.getElementById('new-item-form');
+const itemList = document.getElementById('item-list');
+const resetListButton = document.getElementById('reset-list-button');
 
 /* State */
+let items = [];
 
 /* Events */
 
 /* Display Functions */
+function displayList() {}

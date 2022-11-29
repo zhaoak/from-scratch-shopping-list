@@ -1,0 +1,32 @@
+.page-header {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+.list-section {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    gap: 1em;
+}
+
+#item-list {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    gap: 0.5em;
+}
+
+#add-item-box {
+    order: 9999;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    border: thick dashed red;
+    padding: 0.5em;
+}
