@@ -30,3 +30,34 @@ footer {
     border: thick dashed red;
     padding: 0.5em;
 }
+
+.list-item {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 0.5em;
+}
+
+.marked {
+    order: 9998;
+    border: thin dotted gray;
+    background-color: lightgoldenrodyellow;
+}
+
+.unmarked {
+    order: 0;
+    border: thick solid darkred;
+    background-color: lightsalmon;
+}
+
+input.checkbox {
+    width: 3em;
+    height: 3em;
+    align-self: center;
+}
+
+.quantity-display {
+    color: gray;
+    font-style: italic;
+    font-size: 0.8em;
+}
