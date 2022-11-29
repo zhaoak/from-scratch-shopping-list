@@ -7,6 +7,7 @@ _Web based shopping/todo style list application. Data is unique to each user._
 ![wireframe of finished application](./wireframe.png)
 
 ## Plan
+
 1. html/css layout basics
 2. write renderItem, displayList functions with fake local data, test displaying/rendering works fine
 3. make/configure the actual table i need using supabase web interface
@@ -14,10 +15,12 @@ _Web based shopping/todo style list application. Data is unique to each user._
 
 ## HTML
 ### auth page
+
     - login form (email text box, password text box, submit button)
     - sign up form (email text box, password, text box, submit button)
 
 ### list page
+
     - logout button
     - section for items in list (column flexbox container)
     - for each item:
@@ -28,16 +31,19 @@ _Web based shopping/todo style list application. Data is unique to each user._
     - at bottom of page, as footer, delete all items button
 
 ## State
+
     - `items`: locally stored list of items, retrieved from database on page load and when anything changes
 
 ## Events
 ### auth page
+
     - on click login w/valid login info: authenticate via Supabase API, redirect to list page
     - on click signup w/valid signup info: auth via Supabase API, redirect to list page
     - if either fail: display appropriate error message
     - if already authenticated: redirect to list page
 
 ### list page
+
     - on page load: if not authenticated, redirect to auth page
     - on click logout: logout with Supabase API, redirect to auth page
     - on click list item: mark item in DB, pull updated data, update page
@@ -46,12 +52,15 @@ _Web based shopping/todo style list application. Data is unique to each user._
 
 ## Functions
 ### render functions
+
     - `renderItem(item)` - given item object, returns div for item for rendering to page
 
 ### display functions
+
     - `displayList` - iterates through `items`, renders to page
 
 ### fetch functions
+
     - `fetchList` - fetches all items added by user to list from DB, checking for errors
     - `addItem(item)` - pushes new item and quanitity if provided to DB
     - `markItem(id)` - marks item with id `id` in DB, if already marked, does nothing
