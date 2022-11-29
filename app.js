@@ -1,7 +1,7 @@
 /* Imports */
 import { renderListItem } from './render-utils.js';
 // this will check if we have a user and set signout link if it exists
-import { checkAuth } from './fetch-utils.js';
+import { checkAuth, fetchList } from './fetch-utils.js';
 
 /* Get DOM Elements */
 const addItemForm = document.getElementById('new-item-form');
@@ -9,17 +9,13 @@ const itemList = document.getElementById('item-list');
 const resetListButton = document.getElementById('reset-list-button');
 
 /* State */
-let items = [
-    { name: 'nanners', quantity: '1', marked: false },
-    { name: 'apples', quantity: 'a few', marked: true },
-    { name: 'bolt cutters', quantity: 'as many as possible', marked: false },
-];
+let items = [];
 
 /* Events */
 // on list page load
 window.addEventListener('load', async () => {
     checkAuth();
-    //items = fetchItems();
+    items = await fetchList();
     displayList();
 });
 
@@ -31,5 +27,3 @@ function displayList() {
         itemList.append(itemEl);
     }
 }
-
-displayList();
