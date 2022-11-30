@@ -1,11 +1,62 @@
 /* Imports */
+import { renderListItem, renderMessage } from './render-utils.js';
 // this will check if we have a user and set signout link if it exists
-import './auth/user.js';
+import {
+    signOutUser,
+    checkAuth,
+    fetchList,
+    addItem,
+    clearList,
+    markItem,
+    unmarkItem,
+} from './fetch-utils.js';
 
 /* Get DOM Elements */
+const addItemForm = document.getElementById('new-item-form');
+const itemList = document.getElementById('item-list');
+const resetListButton = document.getElementById('reset-list-button');
+const logoutLink = document.getElementById('logout-link');
 
 /* State */
+let items = [];
 
 /* Events */
+// on list page load
+window.addEventListener('load', async () => {
+    checkAuth();
+    updateLocalItems();
+});
+
+addItemForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const itemData = new FormData(addItemForm);
+
+    // create item, push to DB, reset form, rerender and display list
+    await addItem({ name: itemData.get('itemName'), quantity: itemData.get('itemQuantity') });
+    updateLocalItems();
+    addItemForm.reset();
+});
+
+resetListButton.addEventListener('click', async () => {
+    await clearList();
+    updateLocalItems();
+});
+
+logoutLink.addEventListener('click', async () => {
+    await signOutUser();
+    checkAuth();
+});
 
 /* Display Functions */
+function displayList() {
+    itemList.innerHTML = '';
+    for (let item of items) {
+        const itemEl = renderListItem(item);
+        itemList.append(itemEl);
+    }
+}
+
+export async function updateLocalItems() {
+    items = await fetchList();
+    displayList();
+}
