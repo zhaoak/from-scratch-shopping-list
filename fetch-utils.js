@@ -68,6 +68,15 @@ export async function addItem(item) {
     return checkError(response);
 }
 
+export async function clearList() {
+    const response = await client
+        .from('arbitrary_item_list')
+        .delete()
+        .eq('user_id', client.auth.user().id);
+
+    return checkError(response);
+}
+
 // for checking if response from DB has error
 function checkError({ data, error }) {
     if (error) {

@@ -19,7 +19,8 @@ export function renderListItem(item) {
     }
 
     name.textContent = item.name;
-    quantity.textContent = ` (${item.quantity})`;
+    // if item has quantity specified, print it, otherwise do nothing
+    item.quantity ? (quantity.textContent = ` (${item.quantity})`) : () => {};
 
     // event handler for marking/unmarking item
 
