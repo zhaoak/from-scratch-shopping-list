@@ -1,3 +1,6 @@
+import { markItem, unmarkItem, fetchList } from './fetch-utils.js';
+import { updateLocalItems } from './app.js';
+
 export function renderListItem(item) {
     // create elements
     const div = document.createElement('div');
@@ -23,7 +26,10 @@ export function renderListItem(item) {
     item.quantity ? (quantity.textContent = ` (${item.quantity})`) : () => {};
 
     // event handler for marking/unmarking item
-
+    div.addEventListener('click', async () => {
+        item.marked ? await unmarkItem(item.id) : await markItem(item.id);
+        await updateLocalItems();
+    });
     // append and return
     name.append(quantity);
     div.append(name, checkbox);

@@ -77,6 +77,26 @@ export async function clearList() {
     return checkError(response);
 }
 
+export async function markItem(id) {
+    const response = await client
+        .from('arbitrary_item_list')
+        .update({ marked: true })
+        .eq('user_id', client.auth.user().id)
+        .eq('id', id);
+
+    return checkError(response);
+}
+
+export async function unmarkItem(id) {
+    const response = await client
+        .from('arbitrary_item_list')
+        .update({ marked: false })
+        .eq('user_id', client.auth.user().id)
+        .eq('id', id);
+
+    return checkError(response);
+}
+
 // for checking if response from DB has error
 function checkError({ data, error }) {
     if (error) {

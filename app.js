@@ -1,7 +1,15 @@
 /* Imports */
 import { renderListItem, renderMessage } from './render-utils.js';
 // this will check if we have a user and set signout link if it exists
-import { signOutUser, checkAuth, fetchList, addItem, clearList } from './fetch-utils.js';
+import {
+    signOutUser,
+    checkAuth,
+    fetchList,
+    addItem,
+    clearList,
+    markItem,
+    unmarkItem,
+} from './fetch-utils.js';
 
 /* Get DOM Elements */
 const addItemForm = document.getElementById('new-item-form');
@@ -15,8 +23,7 @@ let items = [];
 // on list page load
 window.addEventListener('load', async () => {
     checkAuth();
-    items = await fetchList();
-    displayList();
+    updateLocalItems();
 });
 
 addItemForm.addEventListener('submit', async (e) => {
@@ -25,15 +32,13 @@ addItemForm.addEventListener('submit', async (e) => {
 
     // create item, push to DB, reset form, rerender and display list
     await addItem({ name: itemData.get('itemName'), quantity: itemData.get('itemQuantity') });
-    items = await fetchList();
-    displayList();
+    updateLocalItems();
     addItemForm.reset();
 });
 
 resetListButton.addEventListener('click', async () => {
     await clearList();
-    items = await fetchList();
-    displayList();
+    updateLocalItems();
 });
 
 /* Display Functions */
@@ -43,4 +48,9 @@ function displayList() {
         const itemEl = renderListItem(item);
         itemList.append(itemEl);
     }
+}
+
+export async function updateLocalItems() {
+    items = await fetchList();
+    displayList();
 }
