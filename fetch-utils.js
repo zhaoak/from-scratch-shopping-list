@@ -54,6 +54,20 @@ export async function fetchList() {
     return checkError(response);
 }
 
+export async function addItem(item) {
+    const response = await client
+        .from('arbitrary_item_list')
+        .insert({
+            name: item.name,
+            marked: false,
+            quantity: item.quantity,
+            user_id: client.auth.user().id,
+        })
+        .single();
+
+    return checkError(response);
+}
+
 // for checking if response from DB has error
 function checkError({ data, error }) {
     if (error) {

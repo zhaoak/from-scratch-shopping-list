@@ -1,7 +1,7 @@
 /* Imports */
-import { renderListItem } from './render-utils.js';
+import { renderListItem, renderMessage } from './render-utils.js';
 // this will check if we have a user and set signout link if it exists
-import { checkAuth, fetchList } from './fetch-utils.js';
+import { signOutUser, checkAuth, fetchList, addItem } from './fetch-utils.js';
 
 /* Get DOM Elements */
 const addItemForm = document.getElementById('new-item-form');
@@ -17,6 +17,17 @@ window.addEventListener('load', async () => {
     checkAuth();
     items = await fetchList();
     displayList();
+});
+
+addItemForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const itemData = new FormData(addItemForm);
+
+    // create item, push to DB, reset form, rerender and display list
+    await addItem({ name: itemData.get('itemName'), quantity: itemData.get('itemQuantity') });
+    items = await fetchList();
+    displayList();
+    addItemForm.reset();
 });
 
 /* Display Functions */

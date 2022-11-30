@@ -28,3 +28,17 @@ export function renderListItem(item) {
     div.append(name, checkbox);
     return div;
 }
+
+export function renderMessage(message) {
+    // create elements
+    const div = document.createElement('div');
+    const messageText = document.createElement('h2');
+
+    // add classes, write message
+    div.classList.add('list-message');
+    messageText.textContent = message;
+
+    // append and return
+    div.append(messageText);
+    return div;
+}
