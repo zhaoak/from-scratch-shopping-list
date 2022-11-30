@@ -27,6 +27,7 @@ export function renderListItem(item) {
 
     // event handler for marking/unmarking item
     div.addEventListener('click', async () => {
+        checkbox.disabled = true;
         item.marked ? await unmarkItem(item.id) : await markItem(item.id);
         await updateLocalItems();
     });

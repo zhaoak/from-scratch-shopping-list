@@ -15,6 +15,7 @@ import {
 const addItemForm = document.getElementById('new-item-form');
 const itemList = document.getElementById('item-list');
 const resetListButton = document.getElementById('reset-list-button');
+const logoutLink = document.getElementById('logout-link');
 
 /* State */
 let items = [];
@@ -39,6 +40,11 @@ addItemForm.addEventListener('submit', async (e) => {
 resetListButton.addEventListener('click', async () => {
     await clearList();
     updateLocalItems();
+});
+
+logoutLink.addEventListener('click', async () => {
+    await signOutUser();
+    checkAuth();
 });
 
 /* Display Functions */
